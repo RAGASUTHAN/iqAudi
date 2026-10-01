@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: iqaudi-security
+    runtime: python
+    buildCommand: pip install -e .
+    startCommand: python render_server.py
+    healthCheckPath: /api/auth/status
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: STRIX_TELEMETRY
+        value: "false"
+    disk:
+      name: iqaudi-data
+      mountPath: /data
+      sizeGB: 10
